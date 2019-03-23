@@ -173,7 +173,7 @@ public class ZipList extends JFrame {
 								File dir=OpenApp.getBasePath();
 								String folderName=dir.getAbsolutePath()+"\\"+tcName;
 								//System.out.println("zip folder path:"+folderName);
-								String zipName=dir.getAbsolutePath()+"\\"+tcName+".zip";
+								String zipName=folderName+".zip";//dir.getAbsolutePath()+"\\"+tcName+".zip";
 								fileList = new ArrayList<String>();
 								File tcNamedir=new File(folderName);
 								//File[] fList=tcNamedir.listFiles();

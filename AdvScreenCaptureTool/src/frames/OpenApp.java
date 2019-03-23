@@ -111,7 +111,7 @@ public class OpenApp {
 
 					frmMultilineScreenCapture.setLocation(w - frmMultilineScreenCapture.getWidth(),
 							h - frmMultilineScreenCapture.getHeight() - 40);
-					System.out.println("IMAGE TYPE: "+getImageType()+ " and mapping: "+isMap());
+					//System.out.println("IMAGE TYPE: "+getImageType()+ " and mapping: "+isMap());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
