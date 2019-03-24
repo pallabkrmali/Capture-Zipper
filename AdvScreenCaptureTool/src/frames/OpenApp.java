@@ -18,7 +18,10 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileFilter;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -50,7 +53,7 @@ public class OpenApp {
 	
 	private static boolean map;
 	private static String imageType;
-	
+	List<String> ziplist;
 	public static void setOpenAppVisible(boolean b) {
 		frmMultilineScreenCapture.setVisible(b);
 	}
@@ -449,7 +452,26 @@ public class OpenApp {
 		
 		btnZip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Under Construction\n Now you can zip from [-] button");
+				//JOptionPane.showMessageDialog(null, "Under Construction\n Now you can zip from [-] button");
+				ziplist=new ArrayList<String>();
+				try {
+					getAllFolders(basePath);
+					if(ziplist.size()>0) {
+						System.out.println("Open new window"+ziplist.size());
+						Zipping zAll=new Zipping();
+						zAll.populatList(ziplist);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Not found any folder to zip under directory:\n"+basePath.getAbsolutePath());
+					}
+				}
+				catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "Java Exception:\n"+e);
+				}
+				/*for(String str:ziplist) {
+					System.out.println(str);
+				}*/
+				
 				//ZipList fzip=new ZipList();
 				//fzip.setVisible(true);
 			}
@@ -630,4 +652,34 @@ public class OpenApp {
 	public static void setBasePath(File basePath) {
 		OpenApp.basePath = basePath;
 	}
+	
+	static FileFilter filter = new FileFilter() {
+        @Override
+        public boolean accept(File pathname) {
+           return pathname.isDirectory();
+        }
+     };
+     public void getAllFolders(File dir) {
+    	 //System.out.println(dir.getAbsolutePath());
+    	 File[] folders=dir.listFiles(filter);
+    	 for (File folder:folders) {
+    		 if(folder.isDirectory()) {
+    			 if(chekFileexistornot(folder) && !new File(folder+".zip").exists()) ziplist.add(folder.getAbsolutePath());
+    			 getAllFolders(folder);
+    		 }
+    		 //else folderList.add(folder.getAbsolutePath());
+    	 }
+     }
+     public boolean chekFileexistornot(File dir) {
+    	 boolean flag=false;
+    	 File[] folders=dir.listFiles();
+    	 for(File f:folders) {
+    		 System.out.println(f.getAbsolutePath());
+    		 if(f.isFile()  && !f.getName().contains(".zip")) {
+    			 flag=true;
+    			 break;
+    		 }
+    	 }
+    	 return flag;
+     }
 }
