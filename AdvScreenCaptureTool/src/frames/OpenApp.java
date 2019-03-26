@@ -138,7 +138,7 @@ public class OpenApp {
 		frmMultilineScreenCapture = new JFrame();
 		frmMultilineScreenCapture.setType(Type.UTILITY);
 		frmMultilineScreenCapture.setResizable(false);
-		frmMultilineScreenCapture.setTitle("Screen Capture Tool (V2.0)");
+		frmMultilineScreenCapture.setTitle("Screen Capture & Zipper Tool (V2.5)");
 		frmMultilineScreenCapture.getContentPane().setBackground(new Color(255, 255, 255));
 		frmMultilineScreenCapture.setBounds(100, 100, 450, frmHight);
 		frmMultilineScreenCapture.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -157,6 +157,15 @@ public class OpenApp {
 		txtPath.setColumns(10);
 		txtPath.setBounds(85, 8, 288, 20);
 		frmMultilineScreenCapture.getContentPane().add(txtPath);
+		
+		final JButton btnZip = new JButton("Zip");
+		
+		btnZip.setForeground(Color.WHITE);
+		btnZip.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnZip.setBackground(Color.BLUE);
+		btnZip.setBounds(383, 40, 63, 22);
+		btnZip.setEnabled(false);
+		frmMultilineScreenCapture.getContentPane().add(btnZip);
 
 		final JButton btnAdd = new JButton("+");
 		btnAdd.setForeground(new Color(0, 0, 0));
@@ -202,6 +211,7 @@ public class OpenApp {
 					btnStart.setVisible(false);
 					btnCapture.setVisible(true);
 					btnReset.setEnabled(true);
+					btnZip.setEnabled(true);
 					frmMultilineScreenCapture.repaint();
 				} else {
 					JOptionPane.showMessageDialog(null, "Invalid storage Path \n Please enter a valid storage location");
@@ -210,8 +220,8 @@ public class OpenApp {
 			}
 		});
 		btnStart.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnStart.setBackground(new Color(255, 250, 205));
-		btnStart.setForeground(new Color(0, 0, 0));
+		btnStart.setBackground(Color.BLUE);
+		btnStart.setForeground(Color.WHITE);
 		btnStart.setBounds(9, 41, 88, 23);
 		frmMultilineScreenCapture.getContentPane().add(btnStart);
 
@@ -247,7 +257,7 @@ public class OpenApp {
 		frmMultilineScreenCapture.getContentPane().add(spinner);
 		
 		JButton btnHelp = new JButton("Help");
-		btnHelp.setBackground(new Color(153, 255, 255));
+		btnHelp.setBackground(SystemColor.activeCaption);
 		btnHelp.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -258,13 +268,7 @@ public class OpenApp {
 		btnHelp.setBounds(383, 0, 63, 18);
 		frmMultilineScreenCapture.getContentPane().add(btnHelp);
 		
-		JButton btnZip = new JButton("Zip");
 		
-		btnZip.setForeground(Color.WHITE);
-		btnZip.setFont(new Font("Tahoma", Font.BOLD, 10));
-		btnZip.setBackground(Color.BLUE);
-		btnZip.setBounds(383, 40, 63, 22);
-		frmMultilineScreenCapture.getContentPane().add(btnZip);
 		
 		btnReset = new JButton("Reset");
 		
@@ -458,8 +462,9 @@ public class OpenApp {
 					getAllFolders(basePath);
 					if(ziplist.size()>0) {
 						System.out.println("Open new window"+ziplist.size());
-						Zipping zAll=new Zipping();
-						zAll.populatList(ziplist);
+						TestZip zAll=new TestZip();
+						zAll.populatFolder(ziplist);
+						zAll.setVisible(true);
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Not found any folder to zip under directory:\n"+basePath.getAbsolutePath());
@@ -487,6 +492,7 @@ public class OpenApp {
 				btnRemove.setEnabled(false);
 				btnStart.setEnabled(true);
 				btnStart.setVisible(true);
+				btnZip.setEnabled(false);
 				btnCapture.setVisible(false);
 				//remove all buttons
 				System.out.println("Number of buttons : "+btnGroup.getButtonCount());

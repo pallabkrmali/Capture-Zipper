@@ -63,6 +63,7 @@ public class About extends JFrame {
 		contentPane.add(lblUserGuide);
 		
 		table = new JTable();
+		table.setForeground(Color.BLUE);
 		table.setRowSelectionAllowed(false);
 		table.setShowHorizontalLines(false);
 		table.setFillsViewportHeight(true);
@@ -80,12 +81,13 @@ public class About extends JFrame {
 				{null, " * Sub TC Folder can be added in the below format-"},
 				{null, "   TC Folder Name\\Sub TC Folder Name "},
 				{" - button", " Red color (-) button removes selected TC name from the list not the contents inside it"},
-				{null, " * Note - Last instance of TC name can't be removed"},
 				{" Open button", " Directly open to the selected TC folder"},
 				{" Capture button", " Capture desktop screen and store captured screen to selected TC (Storage folder)"},
 				{" Wait (Sec) checkbox", " If checked - Wait (1-9) seconds after clicking on Capture button for actual screen capture"},
 				{"", " * User can select wait value (1 to 9) from Spinner"},
-				{"", ""},
+				{"Zip", "Button zip provide the list of folders and subfolders inside the Storage path directory to compress"},
+				{null, " * List contains only non zipped and non empty folders and subfolders"},
+				{null, " * Parent folder name not populated if it don't have any file except folder"},
 				{"............................................","..........................................................................................................................................................................................................................."},
 				{"", " For any query and suggestions -"},
 				{"", " Email # pallab.kumar.mali@accenture.com"}
@@ -96,8 +98,8 @@ public class About extends JFrame {
 		));
 		table.getColumnModel().getColumn(0).setPreferredWidth(120);
 		table.getColumnModel().getColumn(1).setPreferredWidth(647);
-		table.setBackground(new Color(250, 250, 210));
-		table.setBounds(20, 55, 773, 319);
+		table.setBackground(Color.WHITE);
+		table.setBounds(20, 55, 773, 321);
 		contentPane.add(table);
 		
 	}
