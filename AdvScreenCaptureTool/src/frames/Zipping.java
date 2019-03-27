@@ -123,7 +123,7 @@ public class Zipping extends JFrame {
 		String bpath=OpenApp.getBasePath().getAbsolutePath();
 		panel.add(new JLabel("List of non zipped folder under directory:"));
 		panel.add(new JLabel(bpath));
-		System.out.println(bpath);
+		//System.out.println(bpath);
 		for(String str:ziplist) {
 			str=str.substring(bpath.length()+1);
 			//if(!new File(str+".zip").exists()) {

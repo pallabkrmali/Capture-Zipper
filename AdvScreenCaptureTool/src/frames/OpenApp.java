@@ -138,7 +138,7 @@ public class OpenApp {
 		frmMultilineScreenCapture = new JFrame();
 		frmMultilineScreenCapture.setType(Type.UTILITY);
 		frmMultilineScreenCapture.setResizable(false);
-		frmMultilineScreenCapture.setTitle("Screen Capture & Zipper Tool (V2.5)");
+		frmMultilineScreenCapture.setTitle("Screen Capture Pro (V2.5)");
 		frmMultilineScreenCapture.getContentPane().setBackground(new Color(255, 255, 255));
 		frmMultilineScreenCapture.setBounds(100, 100, 450, frmHight);
 		frmMultilineScreenCapture.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -257,7 +257,7 @@ public class OpenApp {
 		frmMultilineScreenCapture.getContentPane().add(spinner);
 		
 		JButton btnHelp = new JButton("Help");
-		btnHelp.setBackground(SystemColor.activeCaption);
+		btnHelp.setBackground(new Color(255, 215, 0));
 		btnHelp.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -285,7 +285,7 @@ public class OpenApp {
 					String tcName = JOptionPane.showInputDialog(inputframe, "Enter TC name OR Sub TC (TC\\SUB TC)", "Add new Test Case",
 							JOptionPane.INFORMATION_MESSAGE);
 					tcName = tcName.trim();
-					System.out.println(tcName);
+					//System.out.println(tcName);
 					if (!tcName.equals(null) && !tcName.equals("")) {
 						if(!tcName.contains("\\\\") && !tcName.contains("/")) {
 							File newDir = fn.createTCFolder(getBasePath().getAbsolutePath(), tcName);
@@ -304,7 +304,8 @@ public class OpenApp {
 						JOptionPane.showMessageDialog(null, "Required TC Name");
 					}
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Required TC Name"+e);
+					//JOptionPane.showMessageDialog(null, "Required TC Name"+e);
+					//e.printStackTrace();
 				}
 
 			}
@@ -319,7 +320,7 @@ public class OpenApp {
 				int selectrbcount=returnRBSelectCount(components);
 				if(rbcount==0) {
 					int act1=JOptionPane.showConfirmDialog(null, "Do you want to reset your application", "Confirmation", JOptionPane.YES_NO_OPTION);
-					System.out.println("Action value:"+act1);
+					//System.out.println("Action value:"+act1);
 					if(act1==0)
 					btnReset.doClick();
 				}
@@ -329,7 +330,7 @@ public class OpenApp {
 				}
 				else {
 					int act=JOptionPane.showConfirmDialog(null, "Do you want to zip selected Result folder", "Confirmation", JOptionPane.YES_NO_OPTION);
-					System.out.println("Action value:"+act);
+					//System.out.println("Action value:"+act);
 					if(act==0) {
 						frmMultilineScreenCapture.setVisible(false);
 						ZipList zls=new ZipList(components);
@@ -348,7 +349,7 @@ public class OpenApp {
 		});
 		btnCapture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean ckbx=chckbxWait.isSelected();
+				//boolean ckbx=chckbxWait.isSelected();
 				if(map) {
 					if (btnGroup.getButtonCount() > 0) {
 						try {
@@ -356,7 +357,7 @@ public class OpenApp {
 							String selectFname = selectedButton.getText();
 							// System.out.println("Captured folder name"+selectFname);
 							
-							System.out.println(spinner.getValue().toString()+" sPINNERCheckbox checked"+ ckbx);
+							//System.out.println(spinner.getValue().toString()+" sPINNERCheckbox checked"+ ckbx);
 							if(chckbxWait.isSelected()) Thread.sleep(Integer.parseInt(spinner.getValue().toString())*1000);
 							
 							frmMultilineScreenCapture.setVisible(false);
@@ -378,7 +379,7 @@ public class OpenApp {
 				
 				else {
 					Component[] components=(Component[])frmMultilineScreenCapture.getContentPane().getComponents();
-					System.out.println("Radio button fund: "+components.length);
+					//System.out.println("Radio button fund: "+components.length);
 					boolean captured=false;
 					if(chckbxWait.isSelected())
 						try {
@@ -461,7 +462,7 @@ public class OpenApp {
 				try {
 					getAllFolders(basePath);
 					if(ziplist.size()>0) {
-						System.out.println("Open new window"+ziplist.size());
+						//System.out.println("Open new window"+ziplist.size());
 						TestZip zAll=new TestZip();
 						zAll.populatFolder(ziplist);
 						zAll.setVisible(true);
@@ -495,7 +496,7 @@ public class OpenApp {
 				btnZip.setEnabled(false);
 				btnCapture.setVisible(false);
 				//remove all buttons
-				System.out.println("Number of buttons : "+btnGroup.getButtonCount());
+				//System.out.println("Number of buttons : "+btnGroup.getButtonCount());
 				try {
 					Component[] components=(Component[])frmMultilineScreenCapture.getContentPane().getComponents();
 					for(Component comp:components) {
@@ -680,7 +681,7 @@ public class OpenApp {
     	 boolean flag=false;
     	 File[] folders=dir.listFiles();
     	 for(File f:folders) {
-    		 System.out.println(f.getAbsolutePath());
+    		// System.out.println(f.getAbsolutePath());
     		 if(f.isFile()  && !f.getName().contains(".zip")) {
     			 flag=true;
     			 break;

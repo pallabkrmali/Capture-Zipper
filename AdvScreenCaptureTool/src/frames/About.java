@@ -85,7 +85,7 @@ public class About extends JFrame {
 				{" Capture button", " Capture desktop screen and store captured screen to selected TC (Storage folder)"},
 				{" Wait (Sec) checkbox", " If checked - Wait (1-9) seconds after clicking on Capture button for actual screen capture"},
 				{"", " * User can select wait value (1 to 9) from Spinner"},
-				{"Zip", "Button zip provide the list of folders and subfolders inside the Storage path directory to compress"},
+				{" Zip", "Button zip provide the list of folders and subfolders inside the Storage path directory to compress"},
 				{null, " * List contains only non zipped and non empty folders and subfolders"},
 				{null, " * Parent folder name not populated if it don't have any file except folder"},
 				{"............................................","..........................................................................................................................................................................................................................."},

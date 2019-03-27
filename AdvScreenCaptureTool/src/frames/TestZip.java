@@ -25,6 +25,8 @@ import java.awt.Component;
 
 import javax.swing.JProgressBar;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 
 public class TestZip extends JFrame {
@@ -37,6 +39,8 @@ public class TestZip extends JFrame {
 	JPanel panel_1;
 	JCheckBox checkBox;
 	List<String> fileList;
+	int totSelected;
+	JLabel lblTC;
 
 	/**
 	 * Launch the application.
@@ -58,6 +62,7 @@ public class TestZip extends JFrame {
 	 * Create the frame.
 	 */
 	public TestZip() {
+		setTitle("Quick Zip");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 591, 600);
@@ -87,7 +92,7 @@ public class TestZip extends JFrame {
 		checkBox.setBounds(10, 41, 89, 23);
 		contentPane.add(checkBox);
 		
-		final JLabel lblTC = new JLabel("");
+		lblTC = new JLabel("");
 		lblTC.setForeground(Color.BLUE);
 		lblTC.setBounds(109, 42, 456, 23);
 		contentPane.add(lblTC);
@@ -141,87 +146,94 @@ public class TestZip extends JFrame {
 		
 		btnZip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				new Thread(){
-					public void run(){
-						btnZip.setEnabled(false);
-						//btnClose.setEnabled(false);
-						int totSelected=countDisable();
-						int tpb=1;
-						Component[] components=panel_1.getComponents();
-						for(Component comp:components) {
-							if(comp instanceof JCheckBox && ((JCheckBox) comp).isSelected() /*&& ((JCheckBox) comp).isEnabled() &&*/) {
-								String tcName=((JCheckBox) comp).getText();
-								System.out.println("Now compressing"+tcName);
-								lblTC.setText("Now compressing : "+tcName);
-								progressBar.setValue(0);
-								//lblPercent.setText("0");
-								((JCheckBox) comp).setEnabled(false);
-								File dir=OpenApp.getBasePath();
-								String folderName=dir.getAbsolutePath()+"\\"+tcName;
-								//System.out.println("zip folder path:"+folderName);
-								String zipName=folderName+".zip";//dir.getAbsolutePath()+"\\"+tcName+".zip";
-								fileList = new ArrayList<String>();
-								File tcNamedir=new File(folderName);
-								//File[] fList=tcNamedir.listFiles();
-								int test=1;
-								try {
-									populateFilesList(tcNamedir);
-									
-								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								/*for(File inst: fList) {
-									if(inst.isFile())fileList.add(inst.getAbsolutePath());
-								}*/
-								try {
-									FileOutputStream fos= new FileOutputStream(zipName);
-									ZipOutputStream  zos=new ZipOutputStream(fos);
-									
-									test=fileList.size();
-									int i=1;
-									for(String imagepath:fileList) {
-						    			progressBar.setValue((int) Math.round((i*100)/test));
-						    			//lblPercent.setText((int)Math.round((i*100)/test)+" %");
-						    			i++;
-						    			
-										//System.out.println(imagepath);
-										//System.out.println(imagepath.substring(tcNamedir.getAbsolutePath().length()+1,imagepath.length()));
-										ZipEntry ze=new ZipEntry(imagepath.substring(tcNamedir.getAbsolutePath().length()+1,imagepath.length()));
-										zos.putNextEntry(ze);
-										FileInputStream fis=new FileInputStream(imagepath);
-										byte[] buffer = new byte[1024];
-							            int len;
-							            while ((len = fis.read(buffer)) > 0) {
-							                zos.write(buffer, 0, len);
-							            }
-							            zos.closeEntry();
-							            fis.close();
+				totSelected=countDisable();
+				//System.out.println("total selected:"+totSelected);
+				if(totSelected>0) {
+					new Thread(){
+						public void run(){
+							btnZip.setEnabled(false);
+							//btnClose.setEnabled(false);
+							
+							int tpb=1;
+							Component[] components=panel_1.getComponents();
+							for(Component comp:components) {
+								if(comp instanceof JCheckBox && ((JCheckBox) comp).isSelected() /*&& ((JCheckBox) comp).isEnabled() &&*/) {
+									String tcName=((JCheckBox) comp).getText();
+									//System.out.println("Now compressing"+tcName);
+									lblTC.setText("Now compressing : "+tcName);
+									progressBar.setValue(0);
+									//lblPercent.setText("0");
+									((JCheckBox) comp).setEnabled(false);
+									File dir=OpenApp.getBasePath();
+									String folderName=dir.getAbsolutePath()+"\\"+tcName;
+									//System.out.println("zip folder path:"+folderName);
+									String zipName=folderName+".zip";//dir.getAbsolutePath()+"\\"+tcName+".zip";
+									fileList = new ArrayList<String>();
+									File tcNamedir=new File(folderName);
+									//File[] fList=tcNamedir.listFiles();
+									int test=1;
+									try {
+										populateFilesList(tcNamedir);
+										
+									} catch (IOException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
 									}
-									
-									zos.close();
-									
-									
-									
-								} catch (FileNotFoundException e) {
-									// TODO Auto-generated catch block
-									//System.out.println(e);
-									e.printStackTrace();
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+									/*for(File inst: fList) {
+										if(inst.isFile())fileList.add(inst.getAbsolutePath());
+									}*/
+									try {
+										FileOutputStream fos= new FileOutputStream(zipName);
+										ZipOutputStream  zos=new ZipOutputStream(fos);
+										
+										test=fileList.size();
+										int i=1;
+										for(String imagepath:fileList) {
+							    			progressBar.setValue((int) Math.round((i*100)/test));
+							    			//lblPercent.setText((int)Math.round((i*100)/test)+" %");
+							    			i++;
+							    			
+											//System.out.println(imagepath);
+											//System.out.println(imagepath.substring(tcNamedir.getAbsolutePath().length()+1,imagepath.length()));
+											ZipEntry ze=new ZipEntry(imagepath.substring(tcNamedir.getAbsolutePath().length()+1,imagepath.length()));
+											zos.putNextEntry(ze);
+											FileInputStream fis=new FileInputStream(imagepath);
+											byte[] buffer = new byte[1024];
+								            int len;
+								            while ((len = fis.read(buffer)) > 0) {
+								                zos.write(buffer, 0, len);
+								            }
+								            zos.closeEntry();
+								            fis.close();
+										}
+										
+										zos.close();
+										
+										
+										
+									} catch (FileNotFoundException e) {
+										// TODO Auto-generated catch block
+										//System.out.println(e);
+										e.printStackTrace();
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 								}
+								progressBar_1.setValue((int) Math.round((tpb*100)/totSelected));
+								tpb++;
 							}
-							progressBar_1.setValue((int) Math.round((tpb*100)/totSelected));
-							tpb++;
+							lblTC.setText("Task Completed");
+							//btnClose.setEnabled(true);
+							checkBox.setEnabled(true);
+							btnZip.setEnabled(true);
 						}
-						lblTC.setText("Task Completed");
-						//btnClose.setEnabled(true);
-						checkBox.setEnabled(true);
-						btnZip.setEnabled(true);
-					}
-				}.start();
+					}.start();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Please select one or more checkbox");
+				}
+				
 			}
 		});
 		
@@ -248,7 +260,7 @@ public class TestZip extends JFrame {
 	public void populatFolder(List<String> ziplist) {
 		String bpath=OpenApp.getBasePath().getAbsolutePath();
 		panel_1.setLayout(new GridLayout(ziplist.size(), 2));
-		
+		lblTC.setText("Total result folder fetched : "+ziplist.size());
 		for(String str:ziplist) {
 			String tooltxt=str;
 			str=str.substring(bpath.length()+1);
@@ -273,8 +285,8 @@ public class TestZip extends JFrame {
 		int counter=0;
 		Component[] components=panel_1.getComponents();
 		for(Component comp:components) {
-			if(comp instanceof JCheckBox && ((JCheckBox) comp).isSelected()) {
-				counter++;
+			if(comp instanceof JCheckBox) {
+				if(((JCheckBox) comp).isSelected()) counter++;
 				((JCheckBox) comp).setEnabled(false);
 			}
 		}

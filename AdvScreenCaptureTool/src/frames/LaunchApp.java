@@ -44,9 +44,9 @@ public class LaunchApp {
 	private void initialize() {
 		frmApplicationConfiguration = new JFrame();
 		frmApplicationConfiguration.setTitle("Application Configuration");
-		frmApplicationConfiguration.getContentPane().setBackground(new Color(248, 248, 255));
+		frmApplicationConfiguration.getContentPane().setBackground(Color.WHITE);
 		frmApplicationConfiguration.setResizable(false);
-		frmApplicationConfiguration.setBounds(100, 100, 631, 245);
+		frmApplicationConfiguration.setBounds(100, 100, 700, 182);
 		frmApplicationConfiguration.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmApplicationConfiguration.getContentPane().setLayout(null);
 		//frame.setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
@@ -55,7 +55,7 @@ public class LaunchApp {
 		startApp.setForeground(Color.WHITE);
 		startApp.setBackground(Color.BLUE);
 		
-		startApp.setBounds(236, 168, 147, 23);
+		startApp.setBounds(235, 114, 147, 23);
 		frmApplicationConfiguration.getContentPane().add(startApp);
 		
 		JLabel lblSelectImageMapping = new JLabel("Select image mapping :");
@@ -63,26 +63,26 @@ public class LaunchApp {
 		frmApplicationConfiguration.getContentPane().add(lblSelectImageMapping);
 		
 		final JRadioButton rdbtnOneToOne = new JRadioButton("One to One");
-		rdbtnOneToOne.setBackground(new Color(248, 248, 255));
+		rdbtnOneToOne.setBackground(Color.WHITE);
 		rdbtnOneToOne.setBounds(149, 30, 118, 23);
 		frmApplicationConfiguration.getContentPane().add(rdbtnOneToOne);
 		
-		JLabel lblNewLabel = new JLabel("( One captured screen to only one folder at a click )");
+		JLabel lblNewLabel = new JLabel("( Store One captured screen to only one folder at a click )");
 		lblNewLabel.setForeground(new Color(0, 0, 255));
-		lblNewLabel.setBounds(294, 34, 321, 14);
+		lblNewLabel.setBounds(294, 34, 352, 14);
 		frmApplicationConfiguration.getContentPane().add(lblNewLabel);
 		
 		JRadioButton rdbtnOneToMany = new JRadioButton("One to Many");
-		rdbtnOneToMany.setBackground(new Color(248, 248, 255));
+		rdbtnOneToMany.setBackground(Color.WHITE);
 		rdbtnOneToMany.setBounds(149, 55, 118, 23);
 		frmApplicationConfiguration.getContentPane().add(rdbtnOneToMany);
 		ButtonGroup map=new ButtonGroup();
 		map.add(rdbtnOneToOne);
 		map.add(rdbtnOneToMany);
 		
-		JLabel lblOneImage = new JLabel("( One captured screen to many folder at a click )");
+		JLabel lblOneImage = new JLabel("( Store One captured screen to many folder at a click )");
 		lblOneImage.setForeground(new Color(0, 0, 255));
-		lblOneImage.setBounds(294, 59, 321, 14);
+		lblOneImage.setBounds(294, 59, 352, 14);
 		frmApplicationConfiguration.getContentPane().add(lblOneImage);
 		
 		JLabel lblSelectImageType = new JLabel("Select Image type :");
@@ -90,18 +90,18 @@ public class LaunchApp {
 		frmApplicationConfiguration.getContentPane().add(lblSelectImageType);
 		
 		final JRadioButton rdbtnPng = new JRadioButton(".png");
-		rdbtnPng.setBackground(new Color(248, 248, 255));
-		rdbtnPng.setBounds(149, 84, 88, 23);
+		rdbtnPng.setBackground(Color.WHITE);
+		rdbtnPng.setBounds(149, 84, 57, 23);
 		frmApplicationConfiguration.getContentPane().add(rdbtnPng);
 		
 		final JRadioButton rdbtnJpg = new JRadioButton(".jpg");
-		rdbtnJpg.setBackground(new Color(248, 248, 255));
-		rdbtnJpg.setBounds(149, 110, 88, 23);
+		rdbtnJpg.setBackground(Color.WHITE);
+		rdbtnJpg.setBounds(210, 84, 57, 23);
 		frmApplicationConfiguration.getContentPane().add(rdbtnJpg);
 		
 		JRadioButton rdbtnbmp = new JRadioButton(".bmp");
-		rdbtnbmp.setBackground(new Color(248, 248, 255));
-		rdbtnbmp.setBounds(149, 138, 88, 23);
+		rdbtnbmp.setBackground(Color.WHITE);
+		rdbtnbmp.setBounds(269, 84, 57, 23);
 		frmApplicationConfiguration.getContentPane().add(rdbtnbmp);
 		
 		ButtonGroup img=new ButtonGroup();

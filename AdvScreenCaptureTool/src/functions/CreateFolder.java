@@ -27,16 +27,16 @@ public class CreateFolder {
 	}
 
 	public File createTCFolder(String fPath, String fName) {
-		System.out.println(fPath+"\\"+fName);
+		//System.out.println(fPath+"\\"+fName);
 		String fPath1="";
 		if (fName != "") {
 			fPath1 = fPath + "\\" + fName;
 		}
 		String[] subfname=fName.split("\\\\");
 		for(int i=0;i<subfname.length;i++) {
-			System.out.println(subfname[i]);
+			//System.out.println(subfname[i]);
 		}
-		System.out.println(fPath1);
+		//System.out.println(fPath1);
 		File dir = new File(fPath1);
 		////// System.out.println("Directory exist: "+dir.exists());
 		if (dir.exists()) {
