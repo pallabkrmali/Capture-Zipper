@@ -90,7 +90,7 @@ public class About extends JFrame {
 				{null, " *  It zips the one that contains any file, not the empty or already zipped folders "},
 				{"............................................","..........................................................................................................................................................................................................................."},
 				{"", " For any query and suggestions -"},
-				{"", " Email # pallab.kumar.mali@accenture.com"}
+				{"", " Email # pallabkrmali@gmail.com"}
 			},
 			new String[] {
 				"Buttons", "Actions / Description"
