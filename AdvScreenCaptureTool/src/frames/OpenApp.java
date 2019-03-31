@@ -188,7 +188,7 @@ public class OpenApp {
 		frmMultilineScreenCapture.getContentPane().add(btnRemove);
 
 		devinfo = new JLabel("Designed and Developed by - Pallab Kumar Mali");
-		devinfo.setToolTipText("Email @ pallab.kumar.mali@accenture.com");
+		devinfo.setToolTipText("Email @ pallabkrmali@gmail.com");
 		devinfo.setForeground(SystemColor.windowBorder);
 		devinfo.setFont(new Font("Tahoma", Font.ITALIC, 9));
 		devinfo.setBounds(223, 67, 211, 14);
